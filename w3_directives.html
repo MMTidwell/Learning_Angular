@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>
+        AngularJS lest you extend HTML with new attributes called directives <br>
+        AngularJS has a set of built -in directivs which offers functionality to your applications <br>
+        AngularJS aslo lets you define your own directives. <br>
+    </h3>
+    <hr>
+
+    <h3>ng-*</h3>
+    AngularJS directives are extended HTML attributes with the prefix ng- <br>
+    <ul>
+        <li>ng-app - initialized the application. also tells AngularJS that the div elment is the owener of the application</li>
+        <li>ng-init - initialized the application data</li>
+        <li>ng-model - binds the value of HTML controles to the application data
+            <ul>
+                <li>Provide type validation for application data (number, email, required)</li>
+                <li>Provide status for application data (invalid, dirty, touched, error)</li>
+                <li>Provide CSS classes for HTML elements</li>
+                <li>Bind HTML elments to HTML forms</li>
+            </ul>
+        </li>
+        <li>ng-repeat - repeats an HTML element</li>        
+    </ul>
+    <hr>
+    
+    <h3>Data Binding</h3>
+    ng-init will bind a value to the HTML using ng-model <br>
+    <em>ng-init is not very commonly used.</em>
+    <hr>
+
+    <h3>Repeating HTML Elements</h3>
+    <div ng-app="" ng-init="name=['Jani', 'Hege', 'Kai']">
+        <ul>
+            <li ng-repeat="x in name">
+                {{ x }}
+            </li>
+        </ul>
+
+        <div ng-app="" ng-init="names=[
+            {name:'Jani', country:'Norway'},
+            {name:'Hege', country:'Sweden'},
+            {name:'Kai', country:'Denmark'}]">  
+            <ul>
+                <li ng-repeat="x in names">
+                    {{x.name + ', ' + x.country}}
+                </li>
+            </ul>
+        </div>
+        <hr>
+
+        <h3>New Directives</h3>
+        New directives are created by using .directive function <br>
+        You can invoke a directive by using
+        <ul>
+            <li>Element Name - &lt;w3-test-directive&gt; &lt;/w3-test-directive&gt;</li>
+            <li>Attribute - &lt;div w3-test-directive&gt; &lt;/div&gt;</li>
+            <li>Class - &lt;div class="w3-test-directive"&gt; &lt;/div&gt;</li>
+            <li>Comment - &lt;!-- directive: w3-test-directive --&gt;</li>            
+        </ul>
+        <em>In order for this to work comment out the above div/function</em>
+        <div ng-app="myApp">
+            <w3-test-directive></w3-test-directive>
+            <script>
+                var app = angular.module("myApp", []);
+                app.directive("w3TestDirective", function () {
+                    return {
+                        template: "<h1>Made by a directive!</h1>"
+                    };
+                });
+            </script>
+        </div>
+        <hr>
+
+        <h3>Restictions</h3>
+        You can restrict your directives to only be invoked ny some fo the methods <br>
+        The legal restrict values are:
+        <ul>
+            <li>E for Element name</li>
+            <li>A for Attribute</li>
+            <li>C for Class</li>
+            <li>M for Comment</li>
+        </ul>
+        <em>This will only work if the above code is commented out</em>
+        <w3-test-directive></w3-test-directive>
+        
+        <div ng-app="myApp" w3-test-directive>
+            <script>
+                var app = angular.module("myApp", []);
+                app.directive("w3TestDirective", function() {
+                    return {
+                        restrict : "A",
+                        template : "<h1>Made by a directive! With restrictions to A</h1>"
+                    };
+                });
+            </script>
+        </div>
+        <hr>
+    </div>
+</body>
+</html>

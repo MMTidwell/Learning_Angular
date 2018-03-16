@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>AngularJs binds data to HTML using expressions</h3>
+    <h3>Background color change</h3>
+    <div ng-app="" ng-init="myCol='lightblue'">
+        <input style="background-color:{{myCol}}" ng-model="myCol" value="{{myCol}}">
+        <hr>
+    <!-- </div> -->
+
+        <h3>Expressions</h3>
+        <div ng-app="" ng-init="quantity=1; cost=5">
+            <p>Total in dollar: {{ quantity*cost }}</p>
+        </div>
+
+        <div ng-app="" ng-init="firstName='John'; lastName='Doe'">
+            <p>The name is {{firstName + " " + lastName}}</p>
+        </div>
+        <hr>
+
+        <h3>Objects</h3>
+        <div ng-app="" ng-init="person={firstName:'Marley', lastName:'Dozer'}">
+            <p>The last name is {{person.lastName}} <em>----{ { } }</em></p>
+            <p>The last name is <span ng-bind="person.lastName"></span><em>----ng-bind</em></p>
+        </div>
+        <hr>
+
+        <h3>Arrays</h3>
+        <div ng-app="" ng-init="points=[1,15,19,2,40]">
+            <p>The third result is {{points[2]}} <em>----{ { } }</em></p>
+            <p>The third result is <span ng-bind="points[2]"></span> <em>----ng-bind</em></p>
+        </div>
+        <hr>
+</body>
+</html>

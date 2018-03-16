@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!-- calling in angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>
+        AngularJS extends HTML with new attributes.<br>
+        AngularJS is perfect for Single Page Applications
+    </h3>
+    <!-- ng-app defines the angularJS application -->
+    <div ng-app="">
+        <!-- binds the value of HTML controls to application data -->
+        <p>Name: <input type="text" ng-model="name"</p>
+        <!-- using {{name}} places the text from the input box -->
+        <h1>Hello {{name}}</h1>
+    </div>
+
+</body>
+</html>

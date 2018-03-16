@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>Data binding in AngularJS is the synchronization between the model and the view</h3>
+    <hr>
+
+    <h3>Data Model</h3>
+    AngularJS applications usually have a data model. The data model is a collection of data available for the application <br><br>
+    var app = angular.module('myApp', []); <br>
+    app.controller('myCtrl', function($scope) { <br>
+        &nbsp;&nbsp;$scope.firestname= "John";<br>
+        &nbsp;&nbsp;$scope.lastname= "Does";<br>
+    });
+    <hr>
+
+    <h3>HTML view</h3>
+    The view has access to the model, and there are several ways of displaying model data in the view. <br>
+    You can use the ng-bind directive, ehich will bind the innter HTML of the element to the specified model property <br><br>
+
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        <p ng-bind="firstName"></p>
+        <p ng-bind="lastName"></p>
+        <p>First name: {{firstName}}</p>
+        <p>Last name: {{lastName}}</p>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+        });
+    </script> -->
+    <hr>
+
+    <h3>The ng-model directive</h3>
+    Use the ng-model to bind data from the model to the view on HTML controls (input, select, textarea) <br><br>
+    
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        <input ng-model="firstName">
+        <input ng-model="lastName">
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope){
+            $scope.firstName = "John";
+            $scope.lastName = "was here";
+        });
+    </script> -->
+    <hr>
+
+    <h3>Two-way Binding</h3>
+    Data binding in AngularJS is the synchronization between the model and the view <br>
+    When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated <br> as well. this happens immediately and automatically,which makes sure that the model and the view is updated at all times <br><br>
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        First Name: <input ng-model="firstName"> <br>
+        Last Name: <input ng-model="lastName">
+        <h1>{{firstName}}</h1>
+        <h1>{{lastName}}</h1>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope){
+            $scope.firstName = "Who";
+            $scope.lastName = "dis?";
+        });
+    </script> -->
+    <hr>
+
+    <h3>AngularJS Controller</h3>
+    Applications in AngularJS are controlled by controllers. <br>
+    Because of the immediate synchronization of the model and the view, the contrller can be completely seperated from the view <br> and simply concentrate on the model data. Thanks to the data binding in AngualarJS,the view will reflect any changes made in the controller.
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h1 ng-click="changeName()">{{firstName}}</h1>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.firstName = "ugh";
+            $scope.changeName = function() {
+                $scope.firstName = "Nelly";
+            };
+        });
+    </script>
+    <hr>
+
+</body>
+</html>

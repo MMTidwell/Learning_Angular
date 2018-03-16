@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body ng-app="myApp">
+    <h3>AngularJS Filters</h3>
+    Filters can be added in AngularJS to format data 
+    <hr>
+
+    <h3>AngularJS Filters</h3>
+    <ul>
+        <li>currency - format a number to a currency format</li>
+        <li>date - format a date to a specified format</li>
+        <li>filter - select a subset of items from an array</li>
+        <li>json - format an obj to a JSON string</li>
+        <li>limitTo - limits an array/string, into a specified number of elements/characters</li>
+        <li>lowercase - format a stirng to lowercase</li>
+        <li>number - format a number to a string</li>
+        <li>orderBy - orders an array by an expression</li>
+        <li>upperscase - format a string to uppercase</li>
+    </ul>
+    <hr>
+
+    <h3>Adding Filters to Expressions</h3>
+    Filters can be added to expressions by using the pipe character, followed by a filter <br><br>
+    <div ng-controller="personCtrl">
+        <p>The first name is {{firstName | lowercase}}</p>
+        <p>The last name is {{lastName | uppercase}}</p>
+    </div>
+    <hr>
+
+    <h3>Adding Filters to Directives</h3>
+    Filters are added to directives, like ng-repeat, by using the pip character, followed by the filter <br>
+    <div ng-controller="namesCtrl">
+        <p>Looping with objects:</p>
+        <ul>
+            <li ng-repeat="x in names | orderBy: 'country'">
+                {{x.name + ", " + x.country}}
+            </li>
+        </ul>
+    </div>
+
+    <div ng-controller="priceCtrl">
+        Price: {{price | currency}}
+    </div>
+    <hr>
+
+    <h3>The filter Filter</h3>
+    The filter Filter selects a subset of an array. <br>
+    The fileter filter can only be used on arrays, and it returns an array containing only the matching items. 
+    <div ng-controller="filterCtrl">
+        <ul>
+            <b>Names with i in them:</b>
+            <li ng-repeat="x in names | filter: 'i'">
+                {{x}}
+            </li>
+            <br>
+            <b>Names with a in them:</b>
+            <li ng-repeat="x in names | filter: 'a'">
+                {{x}}
+            </li>
+        </ul>
+    </div>
+    <hr>
+
+    <h3>Filter an Array Based on User Input</h3>    
+    By setting the ng-model directive on an input field, we can use the value of the input field as an expression in a filter <br>
+    Type a letter inthe input field, a the list will shrink/grow depending on the match.
+    <div ng-controller="inputCtrl">
+        <p><input type="text" ng-model="test"></p>
+        <ul>
+            <li ng-repeat="x in sortting | filter:test">
+                {{x}}
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <em>Click on "Name" or "Country" to change the order</em>
+    <div ng-controller="tableCtrl">
+        <table border="1" width="30%">
+            <tr>
+                <th ng-click="orderByMe('firstName')">Name</th>
+                <th ng-click="orderByMe('country')">Country</th>
+            </tr>
+            <tr ng-repeat="x in firstNames | orderBy: myOrderBy">
+                <td>{{x.name}}</td>
+                <td>{{x.country}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+
+    <h3>Custom Filters</h3>
+    You can make your own filters by registering a new filter factory function with your module
+    <div ng-controller="newNamesCtrl">
+        <ul>
+            <li ng-repeat="x in names">
+                {{x | myFormat}}
+            </li>
+        </ul>
+    </div>
+    <hr>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('personCtrl', function($scope) {
+            $scope.lastName = "Doe";
+            $scope.firstName = "John";
+        });
+
+        app.controller('namesCtrl', function ($scope) {
+            $scope.names = [
+                { name: 'Jani', country: 'Norway' },
+                { name: 'Carl', country: 'Sweden' },
+                { name: 'Margareth', country: 'England' },
+                { name: 'Hege', country: 'Norway' },
+                { name: 'Joe', country: 'Denmark' },
+                { name: 'Gustav', country: 'Sweden' },
+                { name: 'Birgit', country: 'Denmark' },
+                { name: 'Mary', country: 'England' },
+                { name: 'Kai', country: 'Norway' }
+            ];
+        });
+
+        app.controller('priceCtrl', function($scope) {
+            $scope.price = 58;
+        });
+
+
+        app.controller('filterCtrl', function($scope) {
+            $scope.names = [
+                'Jani',
+                'Carl',
+                'Margareth',
+                'Hege',
+                'Joe',
+                'Gustav',
+                'Birgit',
+                'Mary',
+                'Kai'
+            ];
+        });
+
+        app.controller('inputCtrl', function($scope) {
+            $scope.sortting = [
+                'Jani',
+                'Carl',
+                'Margareth',
+                'Hege',
+                'Joe',
+                'Gustav',
+                'Birgit',
+                'Mary',
+                'Kai'
+            ]
+        });
+
+        app.controller('tableCtrl', function($scope) {
+            $scope.firstNames = [
+                { name: 'Jani', country: 'Norway' },
+                { name: 'Carl', country: 'Sweden' },
+                { name: 'Margareth', country: 'England' },
+                { name: 'Hege', country: 'Norway' },
+                { name: 'Joe', country: 'Denmark' },
+                { name: 'Gustav', country: 'Sweden' },
+                { name: 'Birgit', country: 'Denmark' },
+                { name: 'Mary', country: 'England' },
+                { name: 'Kai', country: 'Norway' }
+            ];
+            $scope.orderByMe = function(x) {
+                $scope.myOrderBy = x;
+            }
+        });
+        
+        app.filter('myFormat', function() {
+            return function(x) {
+                var i, c, txt = "";
+                for (i = 0; i < x.length; i++) {
+                    c = x[i];
+                    if (i % 2 == 0) {
+                        c = c.toUpperCase();
+                    }
+                    txt += c;
+                }
+                return txt;
+            }
+        });
+
+        app.controller('newNamesCtrl', function($scope) {
+            $scope.names = ['Jani', 'Carl', 'Margareth', 'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];
+        });
+    </script>
+</body>
+</html>

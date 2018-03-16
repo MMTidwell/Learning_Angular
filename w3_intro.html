@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <body>
+        <h3>
+            AngularJS is a JS framework. It can be added to an HTML page with a script tag. <br>
+            AngularJS extends HTML attributes with directives and binds data to HTML with expressions. 
+        </h3>
+        <!-- ng-app defines the angularJS application -->
+        <div ng-app="" style="border: 2px solid black">
+            <!-- ng-model binds the value of the HTML controls to the applicaiton data -->
+            <p>Name: <input type="text" ng-model="name"></p>
+            <!-- ng-bind binds the application dat to the HTML view -->
+            <p ng-bind="name"></p>
+            <em>ng-model/ng-bind</em>
+        <!-- div commented out to show the ones bellow -->
+        <!-- </div> -->
+
+            <!-- ng-init sets the valye of firstName -->
+            <div ng-app="" ng-init="firstName='John'" style="border: 2px solid grey">
+                <!-- firstName is binded to the view -->
+                <p>The name is <span ng-bind="firstName"></span></p>
+                <em>ng-init/ng-bind</em>
+            </div>
+
+            <!-- data-ng-app and data-ng-init is the same as above, this style will maek the HTML valid -->
+            <div data-ng-app="" data-ng-init="FirstName='Marley'" style="border: 2px solid lightGrey">
+                <p>The name is <span data-ng-bind="FirstName"></span></p>
+                <em>data-ng-init/dat-ng-bind</em>
+            </div>
+
+            <div ng-app="" style="border: 2px solid aliceblue">
+                <!-- {{}} are used for expressions -->
+                <p>My first expression: {{5 + 5}}</p>
+                <em>{ { } }</em>
+            </div>
+
+            <div ng-app="" style="border: 2px solid lightblue">
+                <p>Name: <input type="text" ng-model="names"></p>
+                <p>{{names}}</p>
+                <em>{ { } }</em>            
+            </div>
+
+            <!-- Controller had to be commented out in order to show scripting -->
+            <!-- <div ng-app="myApp" ng-controller="myCtrl" style="border: 2px solid blue"> -->
+            <div style="border: 2px solid blue">
+                First Name: <input type="text" ng-model="FirstNames"><br>
+                Last Name: <input type="text" ng-model="LastNames"><br><br>
+
+                Full Name: {{FirstNames + " " + LastNames}}
+            </div>
+
+            <script>
+                var app = angular.module('myApp', []);
+                app.controller('myCtrl', function($scope) {
+                    $scope.FirstNames = "John";
+                    $scope.LastNames = "Doe";
+                });
+            </script>
+        
+        </div>
+    </body>
+</html>

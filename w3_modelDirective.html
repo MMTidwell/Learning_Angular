@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>The ng-model directive binds the value of HTML controls (input. selct, textarea) to application data</h3>
+    <hr>
+
+    <h3>The ng-model Directive</h3>
+    With the ng-model directive you can bind teh value of an input field to a variable created in AngularJS <br><br>
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        Name: <input ng-model="name">
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+           $scope.name = "John Doe";
+        });
+    </script> -->
+    <hr>
+
+    <h3>Two-way Binding</h3>
+    The binding goes both ways. If the user changed the value inside the input field, the AngularJS property will also change its value <br>
+    <em>Above example must be commented out in order to work correctly.</em> <br><br>
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        Name: <input ng-model="name">
+        <h4>You entered: {{name}}</h4>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.name = "John Doe";
+        });
+    </script> -->
+    <hr>
+
+    <h3>Validate User Input</h3>
+    The ng-model directive can procide type validation for application data (number, e-mail, required) <br><br>
+    <!-- <form ng-app="" name="myForm">
+        Email:<input type="email" name="myAddress" ng-model="text">
+    </form> -->
+    <hr>
+
+    <h3>Application Status</h3>
+    The ng-model directive can provide status for appliction data (invalid, dirty, touched, error) <br>
+    <!-- <em>Everything above has to be commented out in order for it to run</em> <br><br>
+    <form ng-app="" name="myForms" ng-init="myText = 'post@myweb.com'">
+        Email: <input type="email" name="myAddy" ng-model="myText" required>
+        <p>Edit the email address, and try to change the status</p>
+        <h1>Status</h1>
+        <p>Valid: {{myForms.myAddy.$valid}} (if true, the value meets all criteria)</p>
+        <p>Dirty: {{myForms.myAddy.$dirty}} (if true, the value has been changed)</p>
+        <p>Touched: {{myForms.myAddy.$touched}} (if true, the field has been in focus)</p>
+    </form> -->
+    <hr>
+
+    <h3>CSS Classes</h3>
+    The ng-model directive provides CSS classes for HTML elements, depending on their status: <br><br>
+    The ng-model directive adds/removes the following classes, accourding to the status of the form field 
+    <ul>
+        <li>ng-empty</li>
+        <li>ng-not-empty</li>
+        <li>ng-touched</li>
+        <li>ng-untouched</li>
+        <li>ng-valid</li>
+        <li>ng-invalid</li>
+        <li>ng-dirty</li>
+        <li>ng-pending</li>
+        <li>ng-pristine</li>        
+    </ul>
+    <style>
+        input.ng-invalid {
+            background-color: lightsalmon;
+        }
+    </style>
+    <form ng-app="" name="myForm">
+        Enter your name: <input name="myName" ng-model="myText" required>
+    </form>
+    <p>Eidt the text field and it will get/lose classes accourding to the status.</p>
+    <p><b>Note:</b> A text field with the required attribute is not valid when it is empty</p>
+    <hr>
+
+</body>
+</html>

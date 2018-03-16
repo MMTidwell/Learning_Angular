@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+    <h3>AngularJS Controllers</h3>
+    AngularJS controllers control the data of AngularJS applications <br>
+    AngularJS controllers are regular JS Objects <br><br>
+    <hr>
+
+
+    <h3>AngularJS Controllers</h3>
+    The ng-controller directive defines the application controller <br>
+    a controller is a JS object, created by a standard JS object constructor <br><br>
+    The AngularJS application is defined by ng-app="myApp". The application runs inside the div <br>
+    the ng-controller="myCtrl" attribute is an AngularJS directive. It defines the controller. <br>
+    The myCtrl function is a JS function <br>
+    AngularJS will invoke the controller with the $scope obj <br>
+    In AngularJS $scope is the application obj (the owner of the app var and functions) <br>
+    The controller creates 2 properties (variables) in the scope (firstName and lastName) <br>
+    The ng-model directives bind the input fields to the controller properties (firstName and lastName).
+    <br><br>
+    <!-- <div ng-app="myApp" ng-controller="myCtrl">
+        First Name: <input type="text" ng-model="firstName"> <br>
+        Last Name: <input type="text" ng-model="lastName"> <br> <br>
+        Full Name: {{firstName + " " + lastName}}
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope){
+            $scope.firstName = "Not this";
+            $scope.lastName = "again";
+        });
+    </script> -->
+    <hr>
+
+    <h3>Controller Methods</h3>
+    <div ng-app="myApp" ng-controller="personCtrl">
+        First Name: <input type="text" ng-model="firstName"> <br>
+        Last Name: <input type="text" ng-model="lastName"> <br><br>
+        Full Name: {{fullName()}}
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller('personCtrl', function($scope) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+            $scope.fullName = function () {
+                return $scope.firstName + " " + $scope.lastName;
+            }
+        });
+    </script>
+    <hr>
+
+</body>
+</html>
